@@ -1,0 +1,70 @@
+from ibm_watson import LanguageTranslatorV3
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+
+authenticator = IAMAuthenticator(Zr-I1z1B3zm_HFLDByq_L5Oe4qyOEtuEA23Z9RTaU_NU)
+translator = LanguageTranslatorV3(
+    version='2018-05-01',
+    authenticator=authenticator
+)
+
+translator.set_service_url(https://api.us-south.language-translator.watson.cloud.ibm.com/instances/698cb53c-f0d4-4269-9cda-eaeb309ef880)
+ 
+ /
+ 
+ def translate_text(translator, text):
+    translation = translator.translate(
+        text=text,
+        source='en',
+        target='fr'
+    ).get_result()
+    return translation['translations'][0]['translation']
+
+translated_text = translate_text(translator, 'Hello, how are you?')
+print(translated_text)
+
+/
+
+def translate_text(translator, text):
+    translation = translator.translate(
+        text=text,
+        source='fr',
+        target='en'
+    ).get_result()
+    return translation['translations'][0]['translation']
+
+translated_text = translate_text(translator, 'Bonjour, comment vas-tu?')
+print(translated_text)
+
+/
+
+def test_translate_text():
+    text_to_translate = "Bonjour, comment vas-tu?"
+    expected_translation = "Hello, how are you?"
+
+    translation = translate_text(translator, text_to_translate)
+    assert translation == expected_translation, f'Error: {translation}'
+
+test_translate_text()
+
+/
+
+def test_translate_text():
+    text_to_translate = "I am a software developer"
+    expected_translation = "Je suis un développeur de logiciels"
+
+    translation = translate_text(translator, text_to_translate)
+    assert translation == expected_translation, f'Error: {translation}'
+
+test_translate_text()
+
+/
+
+✓The file name should be in lowercase and use underscores instead of spaces.
+✓The function and variable names should be in snake_case and be descriptive.
+✓The code should be well indented and use consistent whitespace throughout.
+✓Use docstrings for functions and modules to provide clear documentation on what the code does.
+✓The code should be written in a way that is easy to understand and maintain.
+✓Always use import statement at the top of the file
+✓Add comments for any complex logic or steps if required
+✓Avoid hard coding credentials and any sensitive data, it's better to keep them in a config file or environment variables
+
